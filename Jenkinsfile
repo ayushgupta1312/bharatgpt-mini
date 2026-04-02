@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'ayushgupta1312/jenkins-agent:latest'
+      image 'jenkins-agent:latest'
       args '-v /var/run/docker.sock:/var/run/docker.sock --user root'
       reuseNode true
     }
