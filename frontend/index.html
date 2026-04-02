@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BharatGPT Mini</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-wrapper">
+    <h1>BharatGPT Mini <span class="flag">🇮🇳</span></h1>
+    <p class="subtitle">Ancient Wisdom · Modern Interface</p>
+    <div id="chat"></div>
+    <div class="controls">
+      <div class="controls-top">
+        <select id="mode">
+          <option value="yoga">🧘 Yoga</option>
+          <option value="philosophy">📜 Philosophy</option>
+          <option value="ayurveda">🌿 Ayurveda</option>
+          <option value="vedic">🔢 Vedic Maths</option>
+        </select>
+        <textarea id="question" placeholder="Ask something..."></textarea>
+      </div>
+      <div class="controls-bottom">
+        <button onclick="askAI()">Ask ✦</button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
