@@ -39,9 +39,15 @@ pipeline {
       steps {
         echo '🧪 Running tests...'
         sh '''
-          docker run --rm -d --name test-app -p 3001:3000 $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG
+          # Run test container
+          docker run --rm -d --name test-app $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG
           sleep 5
-          curl -f http://localhost:3001/health || exit 1
+
+          # Get container IP and test
+          CONTAINER_IP=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' test-app)
+          echo "Container IP: $CONTAINER_IP"
+          curl -f http://$CONTAINER_IP:3000/health || exit 1
+
           docker stop test-app
           echo "✅ Health check passed!"
         '''
