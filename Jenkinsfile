@@ -39,7 +39,11 @@ pipeline {
       steps {
         echo '🧪 Running tests...'
         sh '''
-          # Run test container
+          # Cleanup any leftover test container
+          docker stop test-app || true
+          docker rm test-app || true
+
+          # Run fresh test container
           docker run --rm -d --name test-app $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG
           sleep 5
 
