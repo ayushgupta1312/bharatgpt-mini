@@ -1,11 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'jenkins-agent:latest'
-      args '-v /var/run/docker.sock:/var/run/docker.sock --user root'
-      reuseNode true
-    }
-  }
+  agent any
 
   environment {
     AWS_REGION   = 'ap-south-1'
@@ -77,8 +71,6 @@ pipeline {
         ]) {
           sh '''
             chmod 400 $SSH_KEY
-
-            # Copy deploy script to App EC2 and execute
             ssh -o StrictHostKeyChecking=no -i $SSH_KEY $APP_EC2_USER@$APP_EC2_IP "
               aws ecr get-login-password --region ap-south-1 | \
                 docker login --username AWS --password-stdin $ECR_REGISTRY &&
